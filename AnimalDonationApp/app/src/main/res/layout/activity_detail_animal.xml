@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Exibir imagem do animal -->
+    <ImageView
+        android:id="@+id/imageViewAnimalDetail"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewFavorite"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Exibir nome do animal -->
+    <TextView
+        android:id="@+id/textViewNomeDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nome do Animal"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewAnimalDetail"
+        android:layout_marginTop="16dp" />
+
+    <!-- Exibir idade do animal -->
+    <TextView
+        android:id="@+id/textViewIdadeDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Idade: X anos"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewNomeDetail"
+        android:layout_marginTop="8dp" />
+
+    <!-- Exibir raça do animal -->
+    <TextView
+        android:id="@+id/textViewRacaDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Raça: Desconhecida"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewIdadeDetail"
+        android:layout_marginTop="8dp" />
+
+    <!-- Exibir descrição do animal -->
+    <TextView
+        android:id="@+id/textViewDescricaoDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Descrição do Animal"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewRacaDetail"
+        android:layout_marginTop="8dp" />
+
+    <!-- Botão para contato -->
+    <Button
+        android:id="@+id/buttonContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contatar Doador"
+        app:layout_constraintTop_toBottomOf="@id/textViewDescricaoDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

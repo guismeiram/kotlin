@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Tema do aplicativo -->
+    <style name="Theme.AnimalDonationApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Cor principal do aplicativo -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+
+        <!-- Cor secundária -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@android:color/black</item>
+
+        <!-- Cor de fundo -->
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- Tema para a Tela de Detalhes   parei na aula 5 ou 6-->
+    <style name="Theme.AnimalDonationApp.Detail" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+
+</resources>
