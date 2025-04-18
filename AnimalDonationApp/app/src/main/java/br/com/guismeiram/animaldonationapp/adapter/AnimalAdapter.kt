@@ -77,7 +77,9 @@ class AnimalAdapter(private var animalList: MutableList<Animal>) :
             }
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 animalList.clear()
-                animalList.addAll(results?.values as List<Animal>)
+                if (results?.values is List<*>) {
+                    animalList.addAll((results.values as List<*>).filterIsInstance<Animal>())
+                }
                 notifyDataSetChanged()
             }
         }

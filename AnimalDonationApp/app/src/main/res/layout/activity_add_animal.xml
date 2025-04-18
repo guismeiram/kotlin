@@ -72,28 +72,31 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
 
+    <!-- Botão para selecionar imagem -->
+
+    <!-- Botão para Login -->
     <ImageView
         android:id="@+id/imageViewAnimal"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginTop="124dp"
         android:scaleType="centerCrop"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextDescricao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.412"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextDescricao" />
 
-    <!-- Botão para selecionar imagem -->
     <Button
         android:id="@+id/buttonSelectImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
         android:text="Selecionar Imagem"
-        app:layout_constraintTop_toBottomOf="@id/imageViewAnimal"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewAnimal" />
 
-    <!-- Botão para Login -->
     <Button
         android:id="@+id/buttonAddAnimal"
         android:layout_width="wrap_content"

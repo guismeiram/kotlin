@@ -1,5 +1,5 @@
 [versions]
-agp = "8.8.0"
+agp = "8.8.2"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -19,6 +19,7 @@ firebaseMessagingKtx = "24.1.0"
 playServicesMeasurementApi = "22.3.0"
 firebaseAuthKtx = "23.2.0"
 firebaseDatabaseKtx = "21.0.0"
+firebaseMessagingKtxVersion = "24.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,7 @@ firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messa
 play-services-measurement-api = { group = "com.google.android.gms", name = "play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+google-firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtxVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

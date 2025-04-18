@@ -1,6 +1,7 @@
 package br.com.guismeiram.animaldonationapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -8,12 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.guismeiram.animaldonationapp.adapter.AnimalAdapter
 import br.com.guismeiram.animaldonationapp.model.Animal
+import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.initialize
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +27,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addAnimalButton: Button
     private lateinit var database: DatabaseReference
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+
+    private lateinit var allAnimals: List<Animal>         // Lista completa (ex: vinda da API ou banco de dados)
+    private lateinit var filteredAnimals: List<Animal>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +50,11 @@ class MainActivity : AppCompatActivity() {
 
         // Buscar dados do Firebase
         fetchAnimalsFromFirebase()
+
+        filteredAnimals = allAnimals
+        updateUI(filteredAnimals)
+
+        Firebase.initialize(this)
 
 
 
@@ -103,4 +115,22 @@ class MainActivity : AppCompatActivity() {
         bundle.putString(FirebaseAnalytics.Param.METHOD, "app_open")
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle)
     }
+
+
+
+    fun applyFilters(ageRange: IntRange?, breed: String?) {
+        filteredAnimals = allAnimals.filter { animal ->
+            val idadeOk = ageRange?.contains(animal.idade) ?: true
+            val racaOk = breed?.let { animal.raca.contains(it, ignoreCase = true) } ?: true
+            idadeOk && racaOk
+        }
+
+        updateUI(filteredAnimals)
+    }
+
+    private fun updateUI(animals: List<Animal>) {
+        // Aqui você atualiza seu RecyclerView ou outro componente com a lista filtrada
+        // Exemplo: recyclerViewAdapter.submitList(animals)
+    }
+
 }

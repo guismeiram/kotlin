@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".infra.filter.FilterDialogFragment">
+
+    <!-- EditText Min Age (top of the screen) -->
+    <EditText
+        android:id="@+id/editTextMinAge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Idade mínima"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- EditText Max Age (below Min Age) -->
+    <EditText
+        android:id="@+id/editTextMaxAge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Idade máxima"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextMinAge"
+        android:layout_margin="16dp" />
+
+    <!-- EditText Breed (below Max Age) -->
+    <EditText
+        android:id="@+id/editTextBreed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Raça"
+        android:inputType="textCapWords"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextMaxAge"
+        android:layout_margin="16dp" />
+
+    <!-- Button Apply (bottom of the screen) -->
+    <Button
+        android:id="@+id/buttonApply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Aplicar Filtros"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

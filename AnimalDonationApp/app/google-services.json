@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "568783512442",
+    "project_id": "animaldonationapp",
+    "storage_bucket": "animaldonationapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568783512442:android:3c09baf239acdd1de22cc3",
+        "android_client_info": {
+          "package_name": "br.com.guismeiram.animaldonationapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH_hi_H2hJn5QTAgPxYl-Hk5gzOnRRt4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

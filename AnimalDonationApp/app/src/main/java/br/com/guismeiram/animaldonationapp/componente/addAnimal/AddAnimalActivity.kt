@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import br.com.guismeiram.animaldonationapp.R
 import br.com.guismeiram.animaldonationapp.infra.database.AppDatabase
@@ -30,6 +32,16 @@ class AddAnimalActivity : AppCompatActivity() {
     private lateinit var buttonSelectImage: Button
     private lateinit var buttonAddAnimal: Button
     private var imageUri: Uri? = null
+
+
+    private val imagePickerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                imageUri = data?.data
+                imageViewAnimal.setImageURI(imageUri)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,7 +110,7 @@ class AddAnimalActivity : AppCompatActivity() {
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        imagePickerLauncher.launch(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
