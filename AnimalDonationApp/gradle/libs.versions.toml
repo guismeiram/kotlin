@@ -1,22 +1,21 @@
 [versions]
 agp = "8.8.2"
-kotlin = "2.0.0"
-coreKtx = "1.15.0"
+kotlin = "2.0.21"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.6.1"
-activityCompose = "1.10.0"
-composeBom = "2024.04.01"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.10.1"
+composeBom = "2025.04.00"
 appcompat = "1.7.0"
-roomCommon = "2.6.1"
-roomKtx = "2.6.1"
+roomCommon = "2.7.0"
+roomKtx = "2.7.0"
 playServicesDrive = "17.0.0"
 recyclerview = "1.4.0"
 cardview = "1.0.0"
 constraintlayout = "2.2.1"
-firebaseMessagingKtx = "24.1.0"
-playServicesMeasurementApi = "22.3.0"
+playServicesMeasurementApi = "22.4.0"
 firebaseAuthKtx = "23.2.0"
 firebaseDatabaseKtx = "21.0.0"
 firebaseMessagingKtxVersion = "24.1.1"
@@ -43,7 +42,6 @@ play-services-drive = { group = "com.google.android.gms", name = "play-services-
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 play-services-measurement-api = { group = "com.google.android.gms", name = "play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }

@@ -17,120 +17,119 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.initialize
+import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var animalAdapter: AnimalAdapter
-    private lateinit var animalList: MutableList<Animal>
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var addAnimalButton: Button
     private lateinit var database: DatabaseReference
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
-
-    private lateinit var allAnimals: List<Animal>         // Lista completa (ex: vinda da API ou banco de dados)
-    private lateinit var filteredAnimals: List<Animal>
+    private var allAnimals: MutableList<Animal> = mutableListOf() // Lista completa do Firebase
+    private var filteredAnimals: MutableList<Animal> = mutableListOf() // Lista filtrada
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Habilitar persistência offline
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        //initializeFirebase()
+        setupViews()
+        setupRecyclerView()
+        setupListeners()
 
-        // Inicializar o Firebase Analytics
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
-        // Exemplo de evento personalizado (será registrado quando o usuário abrir a MainActivity)
-        logAppOpenEvent()
-
-        // Inicializar o Firebase Realtime Database
-        database = FirebaseDatabase.getInstance().getReference("animals")
-
-        // Buscar dados do Firebase
         fetchAnimalsFromFirebase()
+    }
 
-        filteredAnimals = allAnimals
-        updateUI(filteredAnimals)
+    //private fun initializeFirebase() {
+        //Firebase.initialize(this)
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+       // firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        //database = FirebaseDatabase.getInstance().getReference("animals")
+        //logAppOpenEvent()
+   // }
 
-        Firebase.initialize(this)
-
-
-
-        // Inicializar componentes da interface
+    private fun setupViews() {
         recyclerView = findViewById(R.id.recyclerViewAnimals)
         searchView = findViewById(R.id.searchView)
         addAnimalButton = findViewById(R.id.addAnimalButton)
+    }
 
-        // Inicializar a lista de animais (posteriormente será carregada do banco de dados)
-        animalList = mutableListOf()
-
-        // Inicializar o adapter e conectá-lo ao RecyclerView
-        animalAdapter = AnimalAdapter(animalList)
+    private fun setupRecyclerView() {
+        animalAdapter = AnimalAdapter(filteredAnimals)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = animalAdapter
+    }
 
-        // Configurar o SearchView para filtrar a lista
+    private fun setupListeners() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(query: String?) = false
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                animalAdapter.filter.filter(newText)
+                filterAnimals(newText)
                 return true
             }
         })
 
-        // Evento de clique para adicionar novos animais
         addAnimalButton.setOnClickListener {
-            // Chamar uma nova tela para adicionar animais (essa tela será criada posteriormente)
+            // Implement your add animal activity launch here
             // startActivity(Intent(this, AddAnimalActivity::class.java))
         }
-
-
     }
 
-    fun fetchAnimalsFromFirebase() {
+    private fun fetchAnimalsFromFirebase() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                animalList.clear()
+                allAnimals.clear()
                 for (animalSnapshot in dataSnapshot.children) {
                     val animal = animalSnapshot.getValue(Animal::class.java)
-                    animal?.let { animalList.add(it) }
+                    animal?.let { allAnimals.add(it) }
                 }
+                filteredAnimals.clear()
+                filteredAnimals.addAll(allAnimals)
                 animalAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Tratar erros de leitura do Firebase
+                Toast.makeText(this@MainActivity, "Error loading data: ${databaseError.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    // Função para registrar um evento personalizado no Firebase Analytics
-    fun logAppOpenEvent() {
-        val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.METHOD, "app_open")
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle)
+    private fun filterAnimals(query: String?) {
+        filteredAnimals.clear()
+        filteredAnimals.addAll(
+            if (query.isNullOrBlank()) {
+                allAnimals
+            } else {
+                allAnimals.filter {
+                    it.nome.contains(query, ignoreCase = true) ||
+                            it.raca.contains(query, ignoreCase = true)
+                }
+            }
+        )
+        animalAdapter.notifyDataSetChanged()
     }
-
-
 
     fun applyFilters(ageRange: IntRange?, breed: String?) {
-        filteredAnimals = allAnimals.filter { animal ->
-            val idadeOk = ageRange?.contains(animal.idade) ?: true
-            val racaOk = breed?.let { animal.raca.contains(it, ignoreCase = true) } ?: true
-            idadeOk && racaOk
+        filteredAnimals.clear()
+        filteredAnimals.addAll(
+            allAnimals.filter { animal ->
+                val ageMatch = ageRange?.contains(animal.idade) ?: true
+                val breedMatch = breed?.let { animal.raca.contains(it, ignoreCase = true) } ?: true
+                ageMatch && breedMatch
+            }
+        )
+        animalAdapter.notifyDataSetChanged()
+    }
+
+    private fun logAppOpenEvent() {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.METHOD, "app_open")
         }
-
-        updateUI(filteredAnimals)
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle)
     }
-
-    private fun updateUI(animals: List<Animal>) {
-        // Aqui você atualiza seu RecyclerView ou outro componente com a lista filtrada
-        // Exemplo: recyclerViewAdapter.submitList(animals)
-    }
-
 }

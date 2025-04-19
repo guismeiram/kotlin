@@ -16,7 +16,7 @@ interface AnimalDao {
     @Query("DELETE FROM animal_table")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM animal_table WHERE (:ageRange IS NULL OR idade BETWEEN :minAge AND :maxAge) AND (:breed IS NULL OR raca LIKE :breed)")
+    @Query("SELECT * FROM animal_table WHERE (:ageRange IS NULL OR idade BETWEEN :minIdade AND :maxIdade) AND (:raca IS NULL OR raca LIKE :raca)")
     suspend fun getFilteredAnimals(ageRange: IntRange?, breed: String?): List<AnimalEntity>
 
     @Query("UPDATE animal_table SET isFavorite = :isFavorite WHERE id = :animalId")
